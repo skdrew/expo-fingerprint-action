@@ -2,17 +2,19 @@ const core = require('@actions/core');
 const fs = require ('fs');
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
-  console.log(`Hello ${fingerprintPath}!`);
+    const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
 
-  const rawdata = fs.readFileSync(fingerprintPath);
-  const rootObj = JSON.parse(rawdata);
+    const fullPath = path.resolve(fingerprintPath);
+    core.info(`Processing file: ${fullPath}`);
+    console.log(`Hello ${fullPath}!`);
 
-  console.log({rootObj});
-  console.log(`hash is: ${rootObj.hash}`);
-  const fingerprint = (new Date()).toTimeString();
-  core.setOutput("fingerprint", fingerprint);
+    const rawdata = fs.readFileSync(fullPath);
+    const rootObj = JSON.parse(rawdata);
+
+    console.log({rootObj});
+    console.log(`hash is: ${rootObj.hash}`);
+    const fingerprint = (new Date()).toTimeString();
+    core.setOutput("fingerprint", fingerprint);
 } catch (error) {
-  core.setFailed(error.message);
+    core.setFailed(error.message);
 }
