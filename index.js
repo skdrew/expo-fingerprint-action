@@ -6,7 +6,7 @@ try {
   const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
   console.log(`Hello ${fingerprintPath}!`);
 
-  const rawdata = fs.readFileSync(fullPath);
+  const rawdata = fs.readFileSync(fingerprintPath);
   const rootObj = JSON.parse(rawdata);
 
   console.log({rootObj});
