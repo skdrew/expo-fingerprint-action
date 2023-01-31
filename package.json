@@ -22,6 +22,6 @@
     "@actions/github": "^5.1.1",
     "@expo/config": "^7.0.3",
     "@expo/fingerprint": "^0.0.1",
-    "expo": "^47.0.13"
+    "expo": "47.0.12"
   }
 }
