@@ -1,15 +1,26 @@
 const core = require('@actions/core');
 const path = require('path');
 const fs = require ('fs');
+const Fingerprint = require ("@expo/fingerprint");
 
-try {
-    const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
-    const fullPath = path.resolve(fingerprintPath);
+async function run() {
 
-    const rawdata = fs.readFileSync(fullPath);
-    const rootObj = JSON.parse(rawdata);
+    try {
+        const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
+        const projectPath = core.getInput("project-path") || "./";
+        const fullPath = path.resolve(fingerprintPath);
+        const fullProjectPath = path.resolve(projectPath);
 
-    core.setOutput("fingerprint", rootObj.hash);
-} catch (error) {
-    core.setFailed(error.message);
+        const rawdata = fs.readFileSync(fullPath);
+        const rootObj = JSON.parse(rawdata);
+
+        core.setOutput("fingerprint", rootObj.hash);
+
+        const currentHash = await Fingerprint.createFingerprintAsync(fullProjectPath);
+        console.log({currentHash})
+    } catch (error) {
+        core.setFailed(error.message);
+    }
 }
+
+run();

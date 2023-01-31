@@ -4,6 +4,9 @@ inputs:
   path:  # id of input
     description: 'Path to fingerprint file'
     default: './.expo/fingerprint.json'
+  project-path:  # id of input
+    description: 'Path to project to fingerprint'
+    default: './'
 outputs:
   fingerprint: # id of output
     description: 'The fingerprint hash'
