@@ -14,6 +14,7 @@ async function run() {
         const rawdata = fs.readFileSync(fullPath);
         const projectHash = JSON.parse(rawdata);
 
+        console.log({fullPath});
         const currentHash = await Fingerprint.createFingerprintAsync(fullProjectPath);
 
         core.setOutput("project-fingerprint", projectHash.hash);
