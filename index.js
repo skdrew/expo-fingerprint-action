@@ -7,14 +7,15 @@ async function run() {
 
     try {
         const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
+        const fullFingerprintPath = path.resolve(fingerprintPath);
+
         const projectPath = core.getInput("project-path") || "./";
-        const fullPath = path.resolve(fingerprintPath);
         const fullProjectPath = path.resolve(projectPath);
 
-        const rawdata = fs.readFileSync(fullPath);
+        const rawdata = fs.readFileSync(fullFingerprintPath);
         const projectHash = JSON.parse(rawdata);
 
-        console.log({fullPath});
+        console.log({fullFingerprintPath, fullProjectPath});
         const currentHash = await Fingerprint.createFingerprintAsync(fullProjectPath);
 
         core.setOutput("project-fingerprint", projectHash.hash);
