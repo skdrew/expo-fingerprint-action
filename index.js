@@ -12,12 +12,13 @@ async function run() {
         const fullProjectPath = path.resolve(projectPath);
 
         const rawdata = fs.readFileSync(fullPath);
-        const rootObj = JSON.parse(rawdata);
-
-        core.setOutput("fingerprint", rootObj.hash);
+        const projectHash = JSON.parse(rawdata);
 
         const currentHash = await Fingerprint.createFingerprintAsync(fullProjectPath);
-        console.log({currentHash})
+
+        core.setOutput("project-fingerprint", projectHash.hash);
+        core.setOutput("current-fingerprint", currentHash.hash);
+        core.setOutput("matches", currentHash.hash === projectHash.hash);
     } catch (error) {
         core.setFailed(error.message);
     }

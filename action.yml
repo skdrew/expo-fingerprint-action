@@ -8,8 +8,12 @@ inputs:
     description: 'Path to project to fingerprint'
     default: './'
 outputs:
-  fingerprint: # id of output
-    description: 'The fingerprint hash'
+  project-fingerprint: # id of output
+    description: 'The stored fingerprint hash of the project'
+  current-fingerprint:
+    description: 'The fingerprint hash of the project now'
+  matches:
+    description: 'Whether the fingerprints match'
 runs:
   using: 'node16'
   main: 'index.js'
