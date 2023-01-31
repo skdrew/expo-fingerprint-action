@@ -1,13 +1,12 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+  path:  # id of input
+    description: 'Path to fingerprint file'
+    default: './.expo/fingerprint.json'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  fingerprint: # id of output
+    description: 'The fingerprint hash'
 runs:
   using: 'node16'
   main: 'index.js'
