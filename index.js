@@ -18,6 +18,7 @@ async function run() {
         console.log({fullFingerprintPath, fullProjectPath});
         const currentHash = await Fingerprint.createFingerprintAsync(fullProjectPath);
 
+        console.log({projectHash: JSON.stringify(projectHash), currentHash: JSON.stringify(currentHash)});
         core.setOutput("project-fingerprint", projectHash.hash);
         core.setOutput("current-fingerprint", currentHash.hash);
         core.setOutput("matches", currentHash.hash === projectHash.hash);
