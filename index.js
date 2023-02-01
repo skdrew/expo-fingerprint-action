@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const path = require('path');
 const fs = require ('fs');
-const Fingerprint = require ("@expo/fingerprint");
+const Fingerprint = require ("@expo/fingerprint/Fingerprint");
 
 async function run() {
 
@@ -12,8 +12,8 @@ async function run() {
         const projectPath = core.getInput("project-path") || "./";
         const fullProjectPath = path.resolve(projectPath);
 
-        const rawdata = fs.readFileSync(fullFingerprintPath);
-        const projectHash = JSON.parse(rawdata);
+        const fullFingerprint = fs.readFileSync(fullFingerprintPath);
+        const projectHash = JSON.parse(fullFingerprint);
 
         console.log({fullFingerprintPath, fullProjectPath});
         const currentHash = await Fingerprint.createFingerprintAsync(fullProjectPath);
@@ -22,6 +22,9 @@ async function run() {
         core.setOutput("project-fingerprint", projectHash.hash);
         core.setOutput("current-fingerprint", currentHash.hash);
         core.setOutput("matches", currentHash.hash === projectHash.hash);
+
+        const results = await Fingerprint.diffFingerprintChangesAsync(fullFingerprint, fullProjectPath);
+        console.log({results});
     } catch (error) {
         core.setFailed(error.message);
     }
