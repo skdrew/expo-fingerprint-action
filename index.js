@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const path = require('path');
 const fs = require ('fs');
-const Fingerprint = require ("@expo/fingerprint/Fingerprint");
+const Fingerprint = require ("@expo/fingerprint");
 
 async function run() {
 
