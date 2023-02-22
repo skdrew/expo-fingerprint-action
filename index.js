@@ -6,7 +6,7 @@ const Fingerprint = require ("@expo/fingerprint");
 async function run() {
 
     try {
-        const fingerprintPath = core.getInput('path') || "./.expo/fingerprint.json";
+        const fingerprintPath = core.getInput('path') || "./.expo-fingerprint.json";
         const fullFingerprintPath = path.resolve(fingerprintPath);
 
         const projectPath = core.getInput("project-path") || "./";
