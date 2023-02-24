@@ -23,8 +23,8 @@ async function run() {
         core.setOutput("current-fingerprint", currentHash.hash);
         core.setOutput("matches", currentHash.hash === projectHash.hash);
 
-        const results = await Fingerprint.diffFingerprintChangesAsync(fullFingerprint, fullProjectPath);
-        console.log({results});
+        // const results = await Fingerprint.diffFingerprintChangesAsync(fullFingerprint, fullProjectPath);
+        // console.log({results});
     } catch (error) {
         core.setFailed(error.message);
     }
